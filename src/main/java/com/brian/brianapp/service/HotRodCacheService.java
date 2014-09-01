@@ -4,6 +4,8 @@ import com.brian.brianapp.connectors.RemoteHotRodCacheConnector;
 import com.brian.brianapp.service.response.Cache;
 import com.brian.brianapp.service.response.CacheEntry;
 import com.brian.brianapp.service.response.GenericResponse;
+import com.brian.brianapp.service.response.GenericResponseList;
+import com.brian.brianapp.service.utils.StringResources;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.VersionedValue;
@@ -40,6 +42,8 @@ public class HotRodCacheService {
 
     @Inject
     private RemoteHotRodCacheConnector cacheConnector;
+    @Inject
+    StringResources stringResources;
 
 
     public GenericResponse initiateCacheConnection() {
@@ -186,6 +190,18 @@ public class HotRodCacheService {
         cacheConnector.initiateCacheConnection();
         logger.info("SUCCESS: new cache location set");
         return new GenericResponse("New Cache Connection to "+cacheIP+" Initiated", "True");
+    }
+
+    public GenericResponseList help() {
+       // return null;  //To change body of created methods use File | Settings | File Templates.
+        ArrayList<GenericResponse> urls = new ArrayList();
+        GenericResponse resp ;
+        for(int i =0 ; i< stringResources.getUrls().size(); i++){
+            resp = new GenericResponse("url",stringResources.getUrls().get(i));
+            urls.add(resp);
+        }
+        GenericResponseList genericResponseList = new GenericResponseList(urls, "Available URLs");
+        return genericResponseList;
     }
 }
 

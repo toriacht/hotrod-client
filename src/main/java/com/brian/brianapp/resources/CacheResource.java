@@ -5,6 +5,7 @@ import com.brian.brianapp.service.HotRodCacheService;
 import com.brian.brianapp.service.response.Cache;
 import com.brian.brianapp.service.response.CacheEntry;
 import com.brian.brianapp.service.response.GenericResponse;
+import com.brian.brianapp.service.response.GenericResponseList;
 import org.jsondoc.core.annotation.*;
 import org.jsondoc.core.pojo.ApiVerb;
 
@@ -120,22 +121,14 @@ public class CacheResource {
 
     @GET
     @Path("/help")
-    public String help() {
-        logger.info("\nPrinting available interfaces....:  ");
+    @Produces("application/json")
+    public Response help() {
+
+        logger.info("Getting Help...");
+        GenericResponseList response = service.help()  ;
+        logger.info("\nReturning available interfaces....:  ");
         String info = "\n**********************************************************************";
-        String info1 = "\n ************* All commands are GET :(  ************************";
-        String info3 = "\n**********************************************************************";
-        String info4 ="\n  **************  Available interfaces @ /rest/cache  ********************* " ;
-        String info5 = "\n 1. start";
-        String info6 = "\n 2. inspect";
-        String info7 = "\n 3. put";
-        String info8 = "\n 4. get";
-        String info9 = "\n 5. getall";
-        String info10 = "\n 6. delete\n";
-        String info2 = "\n\n ******** Sample command:  ***************** \n *********** curl -X GET \"IP_ADDRESS:8080/brian-webapp/rest/cache/put?cache=brianCache&key=cat&value=tiger\" *********\n";
-
-
-        return info+info1+info3+info4+info5+info6+info7+info8+info9+info10+info2;
-       // return helptext;
+        Response.ResponseBuilder response1 = Response.ok(response);
+        return response1.build();
     }
 }

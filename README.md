@@ -36,7 +36,7 @@ Build and Deploy
 Use/Test
 ---------------
 
-A simple Postman test suite available here <https://www.getpostman.com/collections/2494879fe58870bac16b>
+A simple Postman test suite available here <https://www.getpostman.com/collections/74f2deec6a1314357b7b>
 Postman can be downloaded here <https://www.getpostman.com/>
 
 
