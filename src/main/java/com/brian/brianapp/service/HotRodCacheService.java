@@ -95,7 +95,7 @@ public class HotRodCacheService {
 
     }
 
-    public GenericResponse put(String cache, String key, String value) {
+    public Object put(String cache, String key, String value) {
 
         RemoteCacheManager manager = cacheConnector.getManager();
 
@@ -114,7 +114,8 @@ public class HotRodCacheService {
             logger.info("Retrieving new versioned value from cache ........ " + cache);
             logger.info("cache contains new key " + key + " ?" + remoteCache.containsKey(key));
             logger.info("Cache updated: " + key + "=" + value);
-            return new GenericResponse("Entry "+key+" Added", "True");
+            return new CacheEntry(key,value);
+//            return new GenericResponse("Entry "+key+" Added", "True");
         }
         return new GenericResponse("Entry "+key+" Added", "False");
     }
